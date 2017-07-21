@@ -22,6 +22,10 @@ class hiboutik {
         return $this->doRequest('products/' . intval($productId));
     }
 
+    public function getProductsbarcode($productId, $productsize) {
+        return $this->doRequest('products_barcode/1/' . intval($productId) . '/' . intval($productsize));
+    }
+
     private function doRequest($action, $data = null) {
         $timeout = 10;
         $curl = curl_init($this->endpoint . $action);
