@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: Hiboutik Sync
+  Plugin Name: Hiboutik Sync Debug
   Plugin URI: http://murelh.info/blog/hiboutik-sync
   Description: Un plugin permettant de synchroniser les stocks WooCommerce et Hiboutik
   Version: 0.1
