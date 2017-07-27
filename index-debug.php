@@ -1,13 +1,5 @@
 <?php
-/*
-  Plugin Name: Hiboutik Sync Debug
-  Plugin URI: http://murelh.info/blog/hiboutik-sync
-  Description: Un plugin permettant de synchroniser les stocks WooCommerce et Hiboutik
-  Version: 0.1
-  Author: Murelh Ntyandi
-  Author URI: http://murelh.info
-  License: GPL2
- */
+
  /*
 	This file is a debug version of the original index file. It will not update your stock.
 	For safety purposes, you should delete it once you are ready to publish your website
