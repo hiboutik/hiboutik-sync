@@ -4,7 +4,7 @@
   Plugin URI: http://murelh.info/blog/hiboutik-sync
   Description: Un plugin permettant de synchroniser les stocks WooCommerce et Hiboutik
   Version: 0.1
-  Author: Murelh Ntyandi
+  Author: Murelh Ntyandi & Hiboutik
   Author URI: http://murelh.info
   License: GPL2
  */
@@ -29,13 +29,12 @@ function hiboutikSync($query) {
         if (is_array($orderDetail)) {
             // Hiboutik order is not empty. We have to retrieve all products objects.
             foreach ($orderDetail[0]->line_items as $item) {
-                $theProduct = $hiboutik->getProductById($item->product_id); // To get product object from Hiboutik
+                $theProduct_barcode = $hiboutik->getProductsbarcode($item->product_id, $item->product_size);
                 /* Reminder : Hiboutik product and WooCommerce product are linked with barcode (Hiboutik) and SKU (WooCommerce)  */
-                $theWcProductId = intval(wc_get_product_id_by_sku($theProduct[0]->product_barcode)); // To get Woocommerce product id from Hiboutik product barcode
-                if ($theWcProductId > 0) {
+				$theWcProductId = intval(wc_get_product_id_by_sku($theProduct_barcode->barcode)); // To get Woocommerce product id from Hiboutik product barcode
+                if ($theWcProductId > 0 AND $theProduct_barcode->stock_available <> "N/A") {
                     // Product barcode was successfully found in WooCommerce database.
-                    $theWcProduct = $woocommerce->get('products/' . $theWcProductId); // To get WooCommerce product object
-                    $newStockAmount = $theWcProduct['stock_quantity'] - $item->quantity;
+                    $newStockAmount = $theProduct_barcode->stock_available;
                     wc_update_product_stock($theWcProductId, $newStockAmount); // To update Woocommerce Product stock quantity
                 }
             }
